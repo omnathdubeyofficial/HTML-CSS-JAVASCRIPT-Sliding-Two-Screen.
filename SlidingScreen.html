@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  overflow: hidden;
+}
+
+.split-container {
+  display: flex;
+  position: relative;
+  height: 100vh; 
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  overflow-x: hidden;
+  transition: width 0.5s, background-color 0.5s; 
+}
+
+.left {
+  left: 0;
+  background-color: blue;
+  z-index: auto;
+}
+
+.right {
+  right: 0;
+  background-color: red;
+  z-index: auto;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: auto;
+}
+
+</style>
+</head>
+<body>
+
+<div class="split-container">
+  <div class="split left" id="leftPane">
+    <div class="centered">
+      <button onclick="expandPane('leftPane')">Left Click</button>
+    </div>
+  </div>
+  
+  <div class="split right" id="rightPane">
+    <div class="centered">
+      <button onclick="expandPane('rightPane')">Right Click</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function expandPane(paneId) {
+  var pane = document.getElementById(paneId);
+  var oppositePane = paneId === 'leftPane' ? 'rightPane' : 'leftPane';
+
+  if (pane.style.width == "50%" || pane.style.width === "") {
+    pane.style.width = "100%";
+    document.getElementById(oppositePane).style.width = "0%"; // Hide 
+  } else {
+    pane.style.width = "50%";
+    document.getElementById(oppositePane).style.width = "50%"; // Show 
+  }
+}
+</script>
+</body>
+</html>
